@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MYT_App</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="date_list_tab">Liste</string>
+    <string name="date_calendar_tab">Kalender</string>
+    <string name="date_archive_tab">Archiv</string>
+</resources>
