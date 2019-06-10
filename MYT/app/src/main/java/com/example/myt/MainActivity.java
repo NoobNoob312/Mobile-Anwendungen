@@ -1,6 +1,8 @@
 package com.example.myt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,21 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity
+        implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        BottomNavigationView navigation = findViewById(R.id.bottombar);
+        navigation.setOnNavigationItemSelectedListener(this);
+
+        loadFragment (new HomeFragment());
     }
 
     @Override
@@ -47,4 +48,38 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+    private boolean loadFragment (Fragment fragment) {
+        if (fragment != null) {
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        Fragment fragment = null;
+        switch(item.getItemId()) {
+            case R.id.nav_home:
+                break;
+            case R.id.nav_date:
+                fragment = new DateFragment();
+                break;
+            case R.id.nav_organization:
+                break;
+            case R.id.nav_chat:
+                break;
+            case R.id.nav_stats:
+                break;
+        }
+
+        return loadFragment(fragment);
+    }
+
 }
