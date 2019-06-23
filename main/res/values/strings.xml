@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">MYT</string>
+
+    <string name="home">Home</string>
+    <string name="date">Termin</string>
+    <string name="organization">Organisation</string>
+    <string name="chat">Chat</string>
+    <string name="stats">Statistik</string>
+
+    <string name="informationen">Informationen</string>
+    <string name="name">Name</string>
+    <string name="day">Wochentag</string>
+    <string name="intervall">Intervall</string>kader
+    <string name="information">Information</string>
+    <string name="timeframe">Zeitraum</string>
+    <string name="from">Vom</string>
+    <string name="to">Bis</string>
+    <string name="time">Uhrzeit</string>
+    <string name="meeting">Treffen</string>
+    <string name="begin">Beginn</string>
+    <string name="end">Ende</string>
+    <string name="address">Adresse</string>
+    <string name="choose_address">Adresse eingeben</string>
+
+    <string name="training">Training</string>
+    <string name="game">Spiel</string>
+    <string name="competition">Turnier</string>
+    <string name="event">Event</string>
+
+    <string name="squad">Kader</string>
+    <string name="money">Kasse</string>
+    <string name="service">Dienst</string>
+    <string name="driving">Fahrdienst</string>
+    <string name="vacation_illness">Abwesenheit</string>
+    <string name="vote">Abstimmung</string>
+
+</resources>

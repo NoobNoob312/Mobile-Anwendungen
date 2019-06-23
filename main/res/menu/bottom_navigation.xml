@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/nav_date"
+        android:icon="@drawable/ic_insert_invitation_black_24dp"
+        android:title="@string/date" />
+
+    <item
+        android:id="@+id/nav_organization"
+        android:icon="@drawable/ic_view_module_black_24dp"
+        android:title="@string/organization" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_insert_comment_black_24dp"
+        android:title="@string/chat" />
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_insert_chart_black_24dp"
+        android:title="@string/stats" />
+
+</menu>
