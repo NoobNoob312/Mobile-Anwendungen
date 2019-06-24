@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,36 +20,39 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private List<DateCardView> dateCardView;
-    private Activity activity; // eigentlich activity laut tutorial
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
+    //private Activity activity;
+    //private static final int TYPE_HEADER = 0;
+    //private static final int TYPE_ITEM = 1;
 
-    public RecyclerAdapter(Activity activity, List<DateCardView> dateCardView) {
+    public RecyclerAdapter(/*Activity activity,*/ List<DateCardView> dateCardView) {
         this.dateCardView = dateCardView;
-        this.activity = activity;
+        //this.activity = activity;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_date_list, viewGroup, false);
+        ViewHolder vh = new ViewHolder(v);
+
+        return vh;
         //inflate your layout and pass it to view holder
-        LayoutInflater inflater = activity.getLayoutInflater();
+        /*LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.card_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
+        */
     }
 
     @Override
-    public void onBindViewHolder(RecyclerAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         //setting data to view holder elements
         viewHolder.weekday.setText(dateCardView.get(position).getWeekday());
         viewHolder.date.setText(dateCardView.get(position).getDate());
         viewHolder.categoryOfDate.setText(dateCardView.get(position).getCategory());
-        viewHolder.begin.setText(dateCardView.get(position).getTimeBegin());
-        viewHolder.end.setText(dateCardView.get(position).getTimeEnd());
         viewHolder.beginTime.setText(dateCardView.get(position).getTimeBeginNum());
         viewHolder.endTime.setText(dateCardView.get(position).getTimeEndNum());
         //viewHolder.check.setChecked(false).getCheck());
@@ -56,10 +60,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //viewHolder.notAttend.setText(dateCardView.get(position).getNotAttend());
 
         //set on click listener for each element
-        viewHolder.container.setOnClickListener(onClickListener(position));
+        //viewHolder.container.setOnClickListener(onClickListener(position));
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    /*@Override
     public int getItemViewType(int position) {
         if (isPositionHeader(position))
             return TYPE_HEADER;
@@ -69,24 +78,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private boolean isPositionHeader(int position) {return position == 0;}
 
-    private void setDataToView(TextView weekday, TextView date, TextView categoryOfDate, TextView begin, TextView end, TextView beginTime, TextView endTime, int position) {
+    private void setDataToView(TextView weekday, TextView date, TextView categoryOfDate, TextView beginTime, TextView endTime, int position) {
         weekday.setText(dateCardView.get(position).getWeekday());
         date.setText(dateCardView.get(position).getDate());
         categoryOfDate.setText(dateCardView.get(position).getCategory());
-        begin.setText(dateCardView.get(position).getTimeBegin());
-        end.setText(dateCardView.get(position).getTimeEnd());
         beginTime.setText(dateCardView.get(position).getTimeBeginNum());
         endTime.setText(dateCardView.get(position).getTimeEndNum());
         // RadioButton --> check
         // RadioButton --> unsure
         // RadioButton --> notAttend
 
-    }
+    }*/
 
     @Override
-    public int getItemCount() {return (null != dateCardView ? dateCardView.size() : 0);}
+    public int getItemCount() {
+        return dateCardView.size();
+    }
 
-    private View.OnClickListener onClickListener(final int position) {
+    /*@Override
+    public int getItemCount() {return (null != dateCardView ? dateCardView.size() : 0);}
+    */
+
+
+    /*private View.OnClickListener onClickListener(final int position) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,21 +112,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 // set the custom dialog components - texts and image
                 TextView weekday = dialog.findViewById(R.id.weekday);
                 TextView date = dialog.findViewById(R.id.date);
-                TextView  categoryOfDate = dialog.findViewById(R.id.categoryOfDate);
-                TextView begin = dialog.findViewById(R.id.card_begin);
-                TextView end = dialog.findViewById(R.id.card_end);
+                TextView categoryOfDate = dialog.findViewById(R.id.categoryOfDate);
                 TextView beginTime = dialog.findViewById(R.id.card_begin_time);
                 TextView endTime = dialog.findViewById(R.id.card_end_time);
                 //RadioButton check = view.findViewById(R.id.radioButton_check);
                 //RadioButton unsure = view.findViewById(R.id.radioButton_unsure);
                 //Radiobutton notAttend = view.findViewById(R.id.radioButton_notAttend);
 
-                setDataToView(weekday, date, categoryOfDate, begin, end, beginTime, endTime,  position);
+                setDataToView(weekday, date, categoryOfDate, beginTime, endTime,  position);
 
                 dialog.show();
             }
         };
-    }
+    }*/
 
     /**
      * View holder to display each RecyclerView item
@@ -129,7 +141,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         private RadioButton check;
         private RadioButton unsure;
         private RadioButton notAttend;
-        private View container;
+        private CardView container;
 
         public ViewHolder(View view) {
             super(view);
@@ -143,6 +155,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             check = view.findViewById(R.id.radioButton_check);
             unsure = view.findViewById(R.id.radioButton_unsure);
             notAttend = view.findViewById(R.id.radioButton_notAttend);
+
             container = view.findViewById(R.id.card_view);
         }
     }
