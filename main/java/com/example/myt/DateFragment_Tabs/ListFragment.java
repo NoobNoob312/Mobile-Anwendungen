@@ -36,23 +36,23 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_list, container, false);
 
-        recyclerView = view.findViewById(R.id.recyle_view);
+        //recyclerView = view.findViewById(R.id.recyle_view);
         //recyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        //recyclerView.setLayoutManager(layoutManager);
 
         /*
         setRecyclerViewData(); //adding data to array list
         adapter = new RecyclerAdapter(getActivity(), dateCardViewArrayList);
         */
 
-        adapter = new RecyclerAdapter(dateCardViewArrayList);
-        recyclerView.setAdapter(adapter);
+        //adapter = new RecyclerAdapter(dateCardViewArrayList);
+        //recyclerView.setAdapter(adapter);
 
         /*
         fab.setOnClickListener(onAddingListener());
-         */
+        */
 
         fab = view.findViewById(R.id.floatingActionButtonAddDate);
         //final CardView cv = view.findViewById(R.id.cardView);
