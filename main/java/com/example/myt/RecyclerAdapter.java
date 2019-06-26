@@ -1,17 +1,13 @@
 package com.example.myt;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myt.DateFragment_Tabs.DateCardView;
@@ -33,7 +29,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = LayoutInflater.from(mContext).inflate(R.layout.card_layout, viewGroup, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.card_item_adddate, viewGroup, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
@@ -71,7 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(activity);
-                dialog.setContentView(R.layout.card_layout);
+                dialog.setContentView(R.layout.card_item_adddate);
                 dialog.setTitle("Position " + position);
                 dialog.setCancelable(true); // dismiss when touching outside Dialog
 

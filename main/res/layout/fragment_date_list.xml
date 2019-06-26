@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
-    android:background="@drawable/bg"
-    android:orientation="vertical">
+    android:background="@drawable/bg">
 
     <FrameLayout
         android:id="@+id/fragment_date_list"
