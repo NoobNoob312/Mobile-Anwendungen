@@ -15,7 +15,10 @@ import com.example.myt.DateFragment_Tabs.ArchiveFragment;
 import com.example.myt.DateFragment_Tabs.CalendarFragment;
 import com.example.myt.DateFragment_Tabs.ListFragment;
 
-
+/**
+ * One fragment of the five bottom navigation items.
+ * This class is responsible for dates, especially creating new dates.
+ */
 public class DateFragment extends Fragment {
     private FragmentTabHost mTabhost;
 
@@ -23,6 +26,18 @@ public class DateFragment extends Fragment {
 
     }
 
+    /**
+     * Create a Tabhost in fragment.
+     * Tab 1: Liste --> shows all the created dates in a list. And the fab button is responsible<br>
+     *     for creating new dates.
+     * Tab 2: Kalendar --> shows all the created dates as CalendarView. And the fab button is responsible<br>
+     *     for creating new dates.
+     * Tab 3: Archive --> shows all at the past created dates as a list.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

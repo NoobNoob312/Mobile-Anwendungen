@@ -34,4 +34,10 @@
     <string name="vacation_illness">Abwesenheit</string>
     <string name="vote">Abstimmung</string>
 
+    <string name="rememberText">Du schuldest der Manschaft 12€</string>
+    <string name="remember">Erinnerung</string>
+    <string name="vote_question">Welche Trikotfarbe wollen wir nehmen?</string>
+    <string name="radiobutton_vote1">rot</string>
+    <string name="radiobutton_vote2">blau</string>
+    <string name="radiobutton_vote3">grau</string>
 </resources>

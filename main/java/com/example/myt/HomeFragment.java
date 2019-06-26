@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
+    /**
+     * One fragment of the five bottom navigation items.
+     * This class is responsible for dates, especially creating new dates.
+     */
     public HomeFragment() {
 
     }

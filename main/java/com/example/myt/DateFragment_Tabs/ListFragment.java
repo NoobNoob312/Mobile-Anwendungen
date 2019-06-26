@@ -1,6 +1,5 @@
 package com.example.myt.DateFragment_Tabs;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myt.DateFragment_Tabs.ListFragmentAddDate.CategoryFragment;
+import com.example.myt.DateFragment_Tabs.FragmentAddDate.CategoryFragment;
 import com.example.myt.R;
 import com.example.myt.RecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,19 +34,17 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_list, container, false);
 
-        //recyclerView = view.findViewById(R.id.recyle_view);
+        recyclerView = view.findViewById(R.id.recyle_view);
         //recyclerView.setHasFixedSize(true);
 
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        //recyclerView.setLayoutManager(layoutManager);
-
-        /*
         setRecyclerViewData(); //adding data to array list
-        adapter = new RecyclerAdapter(getActivity(), dateCardViewArrayList);
-        */
 
-        //adapter = new RecyclerAdapter(dateCardViewArrayList);
-        //recyclerView.setAdapter(adapter);
+        adapter = new RecyclerAdapter(getContext(), dateCardViewArrayList);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setAdapter(adapter);
 
         /*
         fab.setOnClickListener(onAddingListener());
@@ -61,24 +57,43 @@ public class ListFragment extends Fragment {
             public void onClick(View view) {
                 changeFragment();
                 fab.hide();
+
                 //cv.setVisibility(view.GONE);
+            }
+        });
+
+        /**
+         * Fab button hides if user scrolls.
+         */
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    fab.hide();
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                    fab.show();
+                }
             }
         });
 
         return view;
     }
 
+
     private void changeFragment() {
         getFragmentManager().beginTransaction().replace(R.id.fragment_date_list, new CategoryFragment()).addToBackStack(null).commit();
     }
 
-    /*private void setRecyclerViewData() {
+    private void setRecyclerViewData() {
+
+        dateCardViewArrayList = new ArrayList<>();
         dateCardViewArrayList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
         dateCardViewArrayList.add(new DateCardView("Mi", "31.07.","Training", "20:00", "21:45"));
         dateCardViewArrayList.add(new DateCardView("Fr", "02.08.","Training", "18:00", "20:00"));
         dateCardViewArrayList.add(new DateCardView("So", "04.08.","Spiel", "14:00", "15:15"));
         dateCardViewArrayList.add(new DateCardView("Sa", "17.08.","Event", "20:00", "00:00"));
-    }*/
+    }
 
     /*private View.OnClickListener onAddingListener() {
         return new View.OnClickListener() {

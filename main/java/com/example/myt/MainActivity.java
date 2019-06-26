@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
 
+import com.example.myt.DateFragment_Tabs.ArchiveFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -76,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new OrganizationFragment();
                             break;
                         case R.id.nav_chat:
-                            selectedFragment = new HomeFragment();
+                            selectedFragment = new ArchiveFragment();
                             break;
                         case R.id.nav_stats:
-                            selectedFragment = new HomeFragment();
+                            selectedFragment = new ArchiveFragment();
                             break;
                     }
                     return loadFragment(selectedFragment);

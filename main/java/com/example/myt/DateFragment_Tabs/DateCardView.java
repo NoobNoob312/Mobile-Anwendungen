@@ -27,14 +27,6 @@ public class DateCardView {
         //this.notAttend = notAttend;
     }
 
-    private void initializeData(){
-        dateCardView = new ArrayList<>();
-        dateCardView.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
-        dateCardView.add(new DateCardView("Mi", "31.07.","Training", "20:00", "21:45"));
-        dateCardView.add(new DateCardView("Fr", "02.08.","Training", "18:00", "20:00"));
-        dateCardView.add(new DateCardView("So", "04.08.","Spiel", "14:00", "15:15"));
-        dateCardView.add(new DateCardView("Sa", "17.08.","Event", "20:00", "00:00"));
-    }
 
     public String getWeekday() {
         return weekday;

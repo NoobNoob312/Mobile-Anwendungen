@@ -5,13 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.myt.DateFragment_Tabs.ListFragmentAddDate.CategoryFragment;
+import com.example.myt.DateFragment_Tabs.FragmentAddDate.CategoryFragment;
 import com.example.myt.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,9 +32,7 @@ public class CalendarFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment();
-                fab.hide();
-                calenderView.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "in Entwicklung", Toast.LENGTH_SHORT).show();
             }
         });
 

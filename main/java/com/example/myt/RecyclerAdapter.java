@@ -2,6 +2,7 @@ package com.example.myt;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,10 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private List<DateCardView> dateCardView;
-    //private Activity activity;
-    //private static final int TYPE_HEADER = 0;
-    //private static final int TYPE_ITEM = 1;
+    private Context mContext;
 
-    public RecyclerAdapter(/*Activity activity,*/ List<DateCardView> dateCardView) {
+    public RecyclerAdapter(Context mContext, List<DateCardView> dateCardView) {
+        this.mContext = mContext;
         this.dateCardView = dateCardView;
         //this.activity = activity;
     }
@@ -33,17 +33,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.card_layout, viewGroup, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
-        //inflate your layout and pass it to view holder
-        /*LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.card_layout, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
-        */
     }
 
     @Override
@@ -68,37 +61,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    /*@Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return TYPE_HEADER;
-
-        return TYPE_ITEM;
-    }
-
-    private boolean isPositionHeader(int position) {return position == 0;}
-
-    private void setDataToView(TextView weekday, TextView date, TextView categoryOfDate, TextView beginTime, TextView endTime, int position) {
-        weekday.setText(dateCardView.get(position).getWeekday());
-        date.setText(dateCardView.get(position).getDate());
-        categoryOfDate.setText(dateCardView.get(position).getCategory());
-        beginTime.setText(dateCardView.get(position).getTimeBeginNum());
-        endTime.setText(dateCardView.get(position).getTimeEndNum());
-        // RadioButton --> check
-        // RadioButton --> unsure
-        // RadioButton --> notAttend
-
-    }*/
-
     @Override
     public int getItemCount() {
         return dateCardView.size();
     }
-
-    /*@Override
-    public int getItemCount() {return (null != dateCardView ? dateCardView.size() : 0);}
-    */
-
 
     /*private View.OnClickListener onClickListener(final int position) {
         return new View.OnClickListener() {
@@ -134,13 +100,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         private TextView weekday;
         private TextView date;
         private TextView categoryOfDate;
-        private TextView begin;
-        private TextView end;
         private TextView beginTime;
         private TextView endTime;
+
         private RadioButton check;
         private RadioButton unsure;
         private RadioButton notAttend;
+
         private CardView container;
 
         public ViewHolder(View view) {
@@ -148,10 +114,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             weekday = view.findViewById(R.id.weekday);
             date = view.findViewById(R.id.date);
             categoryOfDate = view.findViewById(R.id.categoryOfDate);
-            begin = view.findViewById(R.id.card_begin);
-            end = view.findViewById(R.id.card_end);
             beginTime = view.findViewById(R.id.card_begin_time);
             endTime = view.findViewById(R.id.card_end_time);
+
             check = view.findViewById(R.id.radioButton_check);
             unsure = view.findViewById(R.id.radioButton_unsure);
             notAttend = view.findViewById(R.id.radioButton_notAttend);
