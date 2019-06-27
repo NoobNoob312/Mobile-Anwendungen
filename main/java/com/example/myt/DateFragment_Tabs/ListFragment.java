@@ -22,7 +22,8 @@ public class ListFragment extends Fragment {
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
-    private ArrayList<DateCardView> dateCardViewArrayList;
+    private ArrayList<Item> itemList;
+    private ArrayList<DateCardView> dateCardViewList;
 
     public ListFragment() {
     }
@@ -39,7 +40,7 @@ public class ListFragment extends Fragment {
 
         setRecyclerViewData(); //adding data to array list
 
-        adapter = new RecyclerAdapter(getContext(), dateCardViewArrayList);
+        adapter = new RecyclerAdapter(getContext(), itemList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -87,12 +88,11 @@ public class ListFragment extends Fragment {
 
     private void setRecyclerViewData() {
 
-        dateCardViewArrayList = new ArrayList<>();
-        dateCardViewArrayList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
-        dateCardViewArrayList.add(new DateCardView("Mi", "31.07.","Training", "20:00", "21:45"));
-        dateCardViewArrayList.add(new DateCardView("Fr", "02.08.","Training", "18:00", "20:00"));
-        dateCardViewArrayList.add(new DateCardView("So", "04.08.","Spiel", "14:00", "15:15"));
-        dateCardViewArrayList.add(new DateCardView("Sa", "17.08.","Event", "20:00", "00:00"));
+        itemList = new ArrayList<Item>();
+        itemList.add(new Item("Item " + 1, Item.ItemType.ADDDATE_ITEM));
+
+        //dateCardViewList = new ArrayList<DateCardView>();
+        //dateCardViewList.add(new DateCardView(DateCardView.ItemType.ADDDATE_ITEM, "Mo", "29.07.","Training", "20:00", "21:45"));
     }
 
     /*private View.OnClickListener onAddingListener() {

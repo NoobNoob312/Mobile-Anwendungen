@@ -1,5 +1,6 @@
 package com.example.myt;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,46 +12,68 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myt.DateFragment_Tabs.DateCardView;
+import com.example.myt.DateFragment_Tabs.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int TYPE_ADDDATE = 1;
+    private static final int TYPE_REMEMBER = 2;
+
     private List<DateCardView> dateCardView;
     private Context mContext;
+    private List<Item> itemList;
 
-    public RecyclerAdapter(Context mContext, List<DateCardView> dateCardView) {
+    public RecyclerAdapter(Context mContext, List<Item> itemList) {
         this.mContext = mContext;
-        this.dateCardView = dateCardView;
+        this.itemList = itemList;
         //this.activity = activity;
     }
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = LayoutInflater.from(mContext).inflate(R.layout.card_item_adddate, viewGroup, false);
-        ViewHolder vh = new ViewHolder(v);
-
-        return vh;
+        if (viewType == TYPE_ADDDATE) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.card_item_adddate, viewGroup, false);
+            return new ViewHolderAdddDate(view);
+        } else if (viewType == TYPE_REMEMBER) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.card_item_remember, viewGroup, false);
+            return new ViewHolderRemember(view);
+        } else {
+            throw new RuntimeException("The type has to be ONE or TWO");
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int listPosition) {
 
-        //setting data to view holder elements
-        viewHolder.weekday.setText(dateCardView.get(position).getWeekday());
-        viewHolder.date.setText(dateCardView.get(position).getDate());
-        viewHolder.categoryOfDate.setText(dateCardView.get(position).getCategory());
-        viewHolder.beginTime.setText(dateCardView.get(position).getTimeBeginNum());
-        viewHolder.endTime.setText(dateCardView.get(position).getTimeEndNum());
-        //viewHolder.check.setChecked(false).getCheck());
-        //viewHolder.unsure.setText(dateCardView.get(position).getUnsure());
-        //viewHolder.notAttend.setText(dateCardView.get(position).getNotAttend());
-
-        //set on click listener for each element
-        //viewHolder.container.setOnClickListener(onClickListener(position));
+        switch (viewHolder.getItemViewType()) {
+            case TYPE_ADDDATE:
+                initLayoutAddDate((ViewHolderAdddDate)viewHolder, listPosition);
+                break;
+            case TYPE_REMEMBER:
+                initLayoutRemember((ViewHolderRemember) viewHolder, listPosition);
+                break;
+            default:
+                break;
+        }
     }
+
+    private void initLayoutAddDate(ViewHolderAdddDate viewHolder, int position) {
+        viewHolder.weekday.setText(itemList.get(position).getName());
+        viewHolder.date.setText(itemList.get(position).getName());
+        viewHolder.categoryOfDate.setText(itemList.get(position).getName());
+        viewHolder.beginTime.setText(itemList.get(position).getName());
+        viewHolder.endTime.setText(itemList.get(position).getName());
+    }
+
+    private void initLayoutRemember(ViewHolderRemember ViewHolder, int position) {
+        ViewHolder.rememberText.setText(itemList.get(position).getName());
+    }
+
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -59,7 +82,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return dateCardView.size();
+        return itemList == null ? 0 : itemList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Item item = itemList.get(position);
+        if (item.getType() == Item.ItemType.ADDDATE_ITEM) {
+            return TYPE_ADDDATE;
+        } else if (item.getType() == Item.ItemType.REMEMBER_ITEM) {
+            return TYPE_REMEMBER;
+        } else {
+            return -1;
+        }
     }
 
     /*private View.OnClickListener onClickListener(final int position) {
@@ -92,7 +127,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
      * View holder to display each RecyclerView item
      */
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    protected class ViewHolderAdddDate extends RecyclerView.ViewHolder {
         private TextView weekday;
         private TextView date;
         private TextView categoryOfDate;
@@ -105,7 +140,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         private CardView container;
 
-        public ViewHolder(View view) {
+        public ViewHolderAdddDate(View view) {
             super(view);
             weekday = view.findViewById(R.id.weekday);
             date = view.findViewById(R.id.date);
@@ -118,6 +153,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             notAttend = view.findViewById(R.id.radioButton_notAttend);
 
             container = view.findViewById(R.id.card_view);
+        }
+    }
+
+    protected class ViewHolderRemember extends RecyclerView.ViewHolder {
+        private TextView rememberText;
+
+        private CardView container;
+
+        public ViewHolderRemember(View view) {
+            super(view);
+            rememberText = view.findViewById(R.id.card_rememberText);
+
+            container = view.findViewById(R.id.card_view_remember);
         }
     }
 }
