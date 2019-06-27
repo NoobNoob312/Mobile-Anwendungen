@@ -1,11 +1,6 @@
 package com.example.myt.DateFragment_Tabs;
 
-import android.widget.RadioButton;
-
-import java.util.List;
-
-public class RememberCardView {
-    private List<DateCardView> dateCardView;
+public class RememberCardView implements ListItem {
     private String remember;
 
     public RememberCardView (String remember) {
@@ -15,5 +10,10 @@ public class RememberCardView {
 
     public String getRemember() {
         return remember;
+    }
+
+    @Override
+    public int getListItemType() {
+        return ListItem.TYPE_REMEMBER;
     }
 }

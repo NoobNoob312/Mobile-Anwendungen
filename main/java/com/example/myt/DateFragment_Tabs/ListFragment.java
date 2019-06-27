@@ -22,7 +22,7 @@ public class ListFragment extends Fragment {
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
-    private ArrayList<Item> itemList;
+    private ArrayList<ListItem> itemList;
     private ArrayList<DateCardView> dateCardViewList;
 
     public ListFragment() {
@@ -88,11 +88,8 @@ public class ListFragment extends Fragment {
 
     private void setRecyclerViewData() {
 
-        itemList = new ArrayList<Item>();
-        itemList.add(new Item("Item " + 1, Item.ItemType.ADDDATE_ITEM));
-
-        //dateCardViewList = new ArrayList<DateCardView>();
-        //dateCardViewList.add(new DateCardView(DateCardView.ItemType.ADDDATE_ITEM, "Mo", "29.07.","Training", "20:00", "21:45"));
+        itemList = new ArrayList<ListItem>();
+        itemList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
     }
 
     /*private View.OnClickListener onAddingListener() {

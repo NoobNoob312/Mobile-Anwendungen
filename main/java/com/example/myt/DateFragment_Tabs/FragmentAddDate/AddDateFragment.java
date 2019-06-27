@@ -14,10 +14,16 @@ import android.widget.TimePicker;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myt.DateFragment_Tabs.DateCardView;
+import com.example.myt.DateFragment_Tabs.ListItem;
 import com.example.myt.R;
+import com.example.myt.RecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddDateFragment extends Fragment {
@@ -29,6 +35,10 @@ public class AddDateFragment extends Fragment {
     private int year, month, day, weekday;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
+
+    private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
+    private ArrayList<ListItem> itemList;
 
     public AddDateFragment() {
 
@@ -185,5 +195,10 @@ public class AddDateFragment extends Fragment {
 
     }
 
+    private void setRecyclerViewData() {
+
+        itemList = new ArrayList<ListItem>();
+        itemList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
+    }
 }
 

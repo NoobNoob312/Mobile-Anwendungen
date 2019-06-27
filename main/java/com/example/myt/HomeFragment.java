@@ -1,5 +1,6 @@
 package com.example.myt;
 
+import android.app.LauncherActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myt.DateFragment_Tabs.DateCardView;
 import com.example.myt.DateFragment_Tabs.Item;
+import com.example.myt.DateFragment_Tabs.ListItem;
 import com.example.myt.DateFragment_Tabs.RememberCardView;
+import com.example.myt.DateFragment_Tabs.VoteCardItem;
 
 import java.util.ArrayList;
 
@@ -24,14 +27,15 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private ArrayList<RememberCardView> rememberCardViewArrayList;
-    private ArrayList<Item> itemList;
+    private ArrayList<ListItem> itemList;
 
     public HomeFragment() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup
+            container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -53,8 +57,9 @@ public class HomeFragment extends Fragment {
 
     private void setRecyclerViewData() {
 
-        itemList = new ArrayList<Item>();
-        itemList.add(new Item("Item " + 2, Item.ItemType.REMEMBER_ITEM));
-        itemList.add(new Item("Item " + 1, Item.ItemType.ADDDATE_ITEM));
+        itemList = new ArrayList<ListItem>();
+        itemList.add(new RememberCardView("Du musst 12€ zahlen"));
+        itemList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
+        itemList.add(new VoteCardItem("Welche Trikotfarbe ist besser?"));
     }
 }

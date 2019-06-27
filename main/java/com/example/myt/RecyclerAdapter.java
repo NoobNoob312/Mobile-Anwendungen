@@ -1,6 +1,5 @@
 package com.example.myt;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +11,21 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myt.DateFragment_Tabs.DateCardView;
-import com.example.myt.DateFragment_Tabs.Item;
+import com.example.myt.DateFragment_Tabs.ListItem;
+import com.example.myt.DateFragment_Tabs.RememberCardView;
+import com.example.myt.DateFragment_Tabs.VoteCardItem;
+import com.example.myt.RecyclerAdapter.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_ADDDATE = 1;
-    private static final int TYPE_REMEMBER = 2;
+public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private List<DateCardView> dateCardView;
     private Context mContext;
-    private List<Item> itemList;
+    private List<ListItem> itemList;
 
-    public RecyclerAdapter(Context mContext, List<Item> itemList) {
+    public RecyclerAdapter(Context mContext, List<ListItem> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
         //this.activity = activity;
@@ -34,35 +33,37 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View view = null;
 
-        if (viewType == TYPE_ADDDATE) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.card_item_adddate, viewGroup, false);
-            return new ViewHolderAdddDate(view);
-        } else if (viewType == TYPE_REMEMBER) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.card_item_remember, viewGroup, false);
-            return new ViewHolderRemember(view);
-        } else {
-            throw new RuntimeException("The type has to be ONE or TWO");
+        switch (viewType) {
+            case ListItem.TYPE_ADDDATE:
+                view = LayoutInflater
+                        .from(mContext)
+                        .inflate(R.layout.card_item_adddate, viewGroup, false);
+                return new ViewHolderAdddDate(view);
+            case ListItem.TYPE_REMEMBER:
+                view = LayoutInflater
+                        .from(mContext)
+                        .inflate(R.layout.card_item_remember, viewGroup, false);
+                return new ViewHolderRemember(view);
+            case ListItem.TYPE_VOTE:
+                view = LayoutInflater
+                        .from(mContext)
+                        .inflate(R.layout.card_item_vote, viewGroup, false);
+                return new ViewHolderVote(view);
         }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int listPosition) {
+    public void onBindViewHolder(ViewHolder viewHolder, int listPosition) {
 
-        switch (viewHolder.getItemViewType()) {
-            case TYPE_ADDDATE:
-                initLayoutAddDate((ViewHolderAdddDate)viewHolder, listPosition);
-                break;
-            case TYPE_REMEMBER:
-                initLayoutRemember((ViewHolderRemember) viewHolder, listPosition);
-                break;
-            default:
-                break;
-        }
+        ListItem item = itemList.get(listPosition);
+        viewHolder.bindType(item);
     }
 
-    private void initLayoutAddDate(ViewHolderAdddDate viewHolder, int position) {
+    /*private void initLayoutAddDate(ViewHolderAdddDate viewHolder, int position) {
         viewHolder.weekday.setText(itemList.get(position).getName());
         viewHolder.date.setText(itemList.get(position).getName());
         viewHolder.categoryOfDate.setText(itemList.get(position).getName());
@@ -75,26 +76,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
+    /*
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-    }
+    }*/
 
     @Override
     public int getItemCount() {
-        return itemList == null ? 0 : itemList.size();
+        return itemList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        Item item = itemList.get(position);
-        if (item.getType() == Item.ItemType.ADDDATE_ITEM) {
-            return TYPE_ADDDATE;
-        } else if (item.getType() == Item.ItemType.REMEMBER_ITEM) {
-            return TYPE_REMEMBER;
-        } else {
-            return -1;
-        }
+        return itemList.get(position).getListItemType();
     }
 
     /*private View.OnClickListener onClickListener(final int position) {
@@ -127,7 +122,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * View holder to display each RecyclerView item
      */
 
-    protected class ViewHolderAdddDate extends RecyclerView.ViewHolder {
+    public abstract class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public abstract void bindType(ListItem item);
+    }
+
+    protected class ViewHolderAdddDate extends ViewHolder {
         private TextView weekday;
         private TextView date;
         private TextView categoryOfDate;
@@ -154,18 +157,39 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             container = view.findViewById(R.id.card_view);
         }
+
+        public void bindType(ListItem item) {
+            weekday.setText(((DateCardView) item).getWeekday());
+            date.setText(((DateCardView) item).getDate());
+            categoryOfDate.setText(((DateCardView) item).getCategory());
+            beginTime.setText(((DateCardView) item).getTimeBeginNum());
+            endTime.setText(((DateCardView) item).getTimeEndNum());
+        }
     }
 
-    protected class ViewHolderRemember extends RecyclerView.ViewHolder {
+    protected class ViewHolderRemember extends ViewHolder {
         private TextView rememberText;
-
-        private CardView container;
 
         public ViewHolderRemember(View view) {
             super(view);
             rememberText = view.findViewById(R.id.card_rememberText);
+        }
 
-            container = view.findViewById(R.id.card_view_remember);
+        public void bindType(ListItem item) {
+            rememberText.setText(((RememberCardView) item).getRemember());
+        }
+    }
+
+    protected class ViewHolderVote extends ViewHolder {
+        private TextView voteText;
+
+        public ViewHolderVote(View view) {
+            super(view);
+            voteText = view.findViewById(R.id.card_voteQuestionText);
+        }
+
+        public void bindType(ListItem item) {
+            voteText.setText(((VoteCardItem) item).getVote());
         }
     }
 }

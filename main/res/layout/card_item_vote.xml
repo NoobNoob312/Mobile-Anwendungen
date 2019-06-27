@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="230dp"
     android:background="@drawable/bg">
 
     <LinearLayout
@@ -15,7 +15,7 @@
             android:id="@+id/card_view_vote"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="0dp"
+            android:layout_margin="20dp"
             android:foreground="?selectableItemBackground"
             app:cardBackgroundColor="#FFB460"
             card_view:cardCornerRadius="0dp"
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
-                    android:layout_marginRight="80dp"
+                    android:layout_marginRight="50dp"
                     android:text="@string/radiobutton_vote1"
                     android:textColor="@color/colorWhite" />
 
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
-                    android:layout_marginRight="70dp"
+                    android:layout_marginRight="50dp"
                     android:text="@string/radiobutton_vote2"
                     android:textColor="@color/colorWhite" />
 

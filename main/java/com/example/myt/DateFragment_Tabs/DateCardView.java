@@ -1,16 +1,9 @@
 package com.example.myt.DateFragment_Tabs;
 
 import android.widget.RadioButton;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class DateCardView {
-    public enum ItemType {
-        ADDDATE_ITEM;
-    }
-
-    private ItemType type;
+public class DateCardView implements ListItem {
 
     private List<DateCardView> dateCardView;
     private String weekday;
@@ -22,8 +15,7 @@ public class DateCardView {
     private RadioButton unsure;
     private RadioButton notAttend;
 
-    public DateCardView (ItemType type, String weekday, String date, String category, String timeBeginNum, String timeEndNum/*, RadioButton check, RadioButton unsure, RadioButton notAttend*/) {
-        this.type = type;
+    public DateCardView (String weekday, String date, String category, String timeBeginNum, String timeEndNum/*, RadioButton check, RadioButton unsure, RadioButton notAttend*/) {
         this.weekday = weekday;
         this.date = date;
         this.category = category;
@@ -65,11 +57,8 @@ public class DateCardView {
         return notAttend;
     }
 
-    public DateCardView.ItemType getType() {
-        return type;
-    }
-
-    public void setType(DateCardView.ItemType type) {
-        this.type = type;
+    @Override
+    public int getListItemType() {
+        return ListItem.TYPE_ADDDATE;
     }
 }
