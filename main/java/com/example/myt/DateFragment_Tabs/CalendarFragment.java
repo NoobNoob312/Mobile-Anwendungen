@@ -14,16 +14,28 @@ import com.example.myt.DateFragment_Tabs.FragmentAddDate.CategoryFragment;
 import com.example.myt.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+/**
+ * One fragment of the three different tabs
+ */
 public class CalendarFragment extends Fragment {
 
     public CalendarFragment() {
 
     }
 
-    @Nullable
+    /**
+     * Loads layout
+     * Uses layout fragment_date_calendar
+     * Creates CalendarView, so you have an overview about the dates (not implemented)
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_calendar, container, false);
 
@@ -38,9 +50,4 @@ public class CalendarFragment extends Fragment {
 
         return view;
     }
-
-    private void changeFragment() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_date_calendar, new CategoryFragment()).addToBackStack(null).commit();
-    }
-
 }

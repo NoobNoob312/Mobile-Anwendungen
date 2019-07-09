@@ -4,34 +4,35 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myt.DateFragment_Tabs.DateCardView;
-import com.example.myt.DateFragment_Tabs.ListItem;
-import com.example.myt.DateFragment_Tabs.RememberCardView;
-import com.example.myt.DateFragment_Tabs.VoteCardItem;
+import com.example.myt.CardItem.DateCardItem;
+import com.example.myt.CardItem.ListItem;
+import com.example.myt.CardItem.RememberCardView;
+import com.example.myt.CardItem.VoteCardItem;
 import com.example.myt.RecyclerAdapter.ViewHolder;
 
 import java.util.List;
 
-
+/**
+ * Used for the different types of CardViews, which are set in a list
+ * Use recyclerView
+ */
 public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private List<DateCardView> dateCardView;
     private Context mContext;
     private List<ListItem> itemList;
 
     public RecyclerAdapter(Context mContext, List<ListItem> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
-        //this.activity = activity;
     }
 
-
+    /**
+     * Create new views
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = null;
@@ -56,37 +57,35 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         return null;
     }
 
+    /**
+     * // Replace the contents of a view (invoked by the layout manager)
+     *
+     * @param viewHolder replace the contents of the view with that element
+     * @param position   get element from dataset at this position
+     */
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int listPosition) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        ListItem item = itemList.get(listPosition);
+        ListItem item = itemList.get(position);
         viewHolder.bindType(item);
     }
 
-    /*private void initLayoutAddDate(ViewHolderAdddDate viewHolder, int position) {
-        viewHolder.weekday.setText(itemList.get(position).getName());
-        viewHolder.date.setText(itemList.get(position).getName());
-        viewHolder.categoryOfDate.setText(itemList.get(position).getName());
-        viewHolder.beginTime.setText(itemList.get(position).getName());
-        viewHolder.endTime.setText(itemList.get(position).getName());
-    }
-
-    private void initLayoutRemember(ViewHolderRemember ViewHolder, int position) {
-        ViewHolder.rememberText.setText(itemList.get(position).getName());
-    }
-
-
-    /*
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }*/
-
+    /**
+     * // Return the size of dataset (invoked by the layout manager)
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return itemList.size();
     }
 
+    /**
+     * gets type of my item (CardView) which has to be created
+     *
+     * @param position get element from dataset at this position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return itemList.get(position).getListItemType();
@@ -121,7 +120,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     /**
      * View holder to display each RecyclerView item
      */
-
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View itemView) {
             super(itemView);
@@ -130,6 +128,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         public abstract void bindType(ListItem item);
     }
 
+
     protected class ViewHolderAdddDate extends ViewHolder {
         private TextView weekday;
         private TextView date;
@@ -137,11 +136,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         private TextView beginTime;
         private TextView endTime;
 
-        private RadioButton check;
-        private RadioButton unsure;
-        private RadioButton notAttend;
+        // private RadioButton check;
+        // private RadioButton unsure;
+        // private RadioButton notAttend;
 
-        private CardView container;
+        // private CardView container;
 
         public ViewHolderAdddDate(View view) {
             super(view);
@@ -151,19 +150,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
             beginTime = view.findViewById(R.id.card_begin_time);
             endTime = view.findViewById(R.id.card_end_time);
 
-            check = view.findViewById(R.id.radioButton_check);
-            unsure = view.findViewById(R.id.radioButton_unsure);
-            notAttend = view.findViewById(R.id.radioButton_notAttend);
+            // check = view.findViewById(R.id.radioButton_check);
+            // unsure = view.findViewById(R.id.radioButton_unsure);
+            // notAttend = view.findViewById(R.id.radioButton_notAttend);
 
-            container = view.findViewById(R.id.card_view);
+            // container = view.findViewById(R.id.card_view);
         }
 
         public void bindType(ListItem item) {
-            weekday.setText(((DateCardView) item).getWeekday());
-            date.setText(((DateCardView) item).getDate());
-            categoryOfDate.setText(((DateCardView) item).getCategory());
-            beginTime.setText(((DateCardView) item).getTimeBeginNum());
-            endTime.setText(((DateCardView) item).getTimeEndNum());
+            weekday.setText(((DateCardItem) item).getWeekday());
+            date.setText(((DateCardItem) item).getDate());
+            categoryOfDate.setText(((DateCardItem) item).getCategory());
+            beginTime.setText(((DateCardItem) item).getTimeBeginNum());
+            endTime.setText(((DateCardItem) item).getTimeEndNum());
         }
     }
 

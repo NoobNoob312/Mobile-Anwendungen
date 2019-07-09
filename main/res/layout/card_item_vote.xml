@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bgcardpink"/>
+                android:background="@drawable/bg_vote_card"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

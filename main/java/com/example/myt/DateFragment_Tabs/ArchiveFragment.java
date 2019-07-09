@@ -10,18 +10,29 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myt.R;
 
+/**
+ * One fragment of the three different tabs
+ */
 public class ArchiveFragment extends Fragment {
 
     public ArchiveFragment() {
 
     }
 
-    @Nullable
+    /**
+     * Loads layout
+     * Uses layout fragment_date_archive
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_archive, container, false);
+        View view = inflater.inflate(R.layout.fragment_date_archive, container, false);
 
         return view;
     }

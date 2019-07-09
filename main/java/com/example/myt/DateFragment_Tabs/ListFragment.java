@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myt.CardItem.DateCardItem;
+import com.example.myt.CardItem.ListItem;
 import com.example.myt.DateFragment_Tabs.FragmentAddDate.CategoryFragment;
 import com.example.myt.R;
 import com.example.myt.RecyclerAdapter;
@@ -23,15 +24,14 @@ public class ListFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private ArrayList<ListItem> itemList;
-    private ArrayList<DateCardView> dateCardViewList;
+    private ArrayList<DateCardItem> dateCardItemList;
 
     public ListFragment() {
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_list, container, false);
 
@@ -47,19 +47,12 @@ public class ListFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        /*
-        fab.setOnClickListener(onAddingListener());
-        */
-
         fab = view.findViewById(R.id.floatingActionButtonAddDate);
-        //final CardView cv = view.findViewById(R.id.cardView);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFragment();
                 fab.hide();
-
-                //cv.setVisibility(view.GONE);
             }
         });
 
@@ -86,89 +79,15 @@ public class ListFragment extends Fragment {
         getFragmentManager().beginTransaction().replace(R.id.fragment_date_list, new CategoryFragment()).addToBackStack(null).commit();
     }
 
+    /**
+     * Create CardView in Fragment 'Date'
+     */
     private void setRecyclerViewData() {
 
         itemList = new ArrayList<ListItem>();
-        itemList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
+        itemList.add(new DateCardItem("Mo", "29.07.", "Training", "20:00", "21:45"));
+        itemList.add(new DateCardItem("Mi", "31.07.", "Training", "20:00", "21:45"));
+        itemList.add(new DateCardItem("Sa", "03.08.", "Spiel", "14:00", "15:15"));
+        itemList.add(new DateCardItem("Sa", "10.08.", "Essen gehen", "20:00", "23:00"));
     }
-
-    /*private View.OnClickListener onAddingListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_add); //layout for dialog
-                dialog.setTitle("Add a new friend");
-                dialog.setCancelable(false); //none-dismiss when touching outside Dialog
-
-                // set the custom dialog components - texts and image
-                EditText name = (EditText) dialog.findViewById(R.id.name);
-                EditText job = (EditText) dialog.findViewById(R.id.job);
-                Spinner spnGender = (Spinner) dialog.findViewById(R.id.gender);
-                View btnAdd = dialog.findViewById(R.id.btn_ok);
-                View btnCancel = dialog.findViewById(R.id.btn_cancel);
-
-                //set spinner adapter
-                ArrayList<String> gendersList = new ArrayList<>();
-                gendersList.add("Male");
-                gendersList.add("Female");
-                ArrayAdapter<String> spnAdapter = new ArrayAdapter<String>(MainActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, gendersList);
-                spnGender.setAdapter(spnAdapter);
-
-                //set handling event for 2 buttons and spinner
-                spnGender.setOnItemSelectedListener(onItemSelectedListener());
-                btnAdd.setOnClickListener(onConfirmListener(name, job, dialog));
-                btnCancel.setOnClickListener(onCancelListener(dialog));
-
-                dialog.show();
-            }
-        };
-    }
-
-    private AdapterView.OnItemSelectedListener onItemSelectedListener() {
-        return new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView parent, View view, int position, long id) {
-                if (position == 0) {
-                    gender = true;
-                } else {
-                    gender = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView parent) {
-
-            }
-        };
-    }
-
-    private View.OnClickListener onConfirmListener(final EditText name, final EditText job, final Dialog dialog) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Friend friend = new Friend(name.getText().toString().trim(), gender, job.getText().toString().trim());
-
-                //adding new object to arraylist
-                friendArrayList.add(friend);
-
-                //notify data set changed in RecyclerView adapter
-                adapter.notifyDataSetChanged();
-
-                //close dialog after all
-                dialog.dismiss();
-            }
-        };
-    }
-
-    private View.OnClickListener onCancelListener(final Dialog dialog) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        };
-    }*/
-
 }

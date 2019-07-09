@@ -7,18 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myt.DateFragment_Tabs.DateCardView;
-import com.example.myt.DateFragment_Tabs.ListItem;
+import com.example.myt.CardItem.ListItem;
 import com.example.myt.R;
 import com.example.myt.RecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,28 +24,33 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Kind of formular to create a new date
+ */
 public class AddDateFragment extends Fragment {
 
     private TextView dateFrom, dateTo;
     private TextView timeBegin, timeEnd;
-    private TextView dateWeekday;
+    private Spinner dateWeekday;
 
-    private int year, month, day, weekday;
+    private int year, month, day;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-
-    private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
-    private ArrayList<ListItem> itemList;
 
     public AddDateFragment() {
 
     }
 
-    @Nullable
+    /**
+     * Creates Calendar and Time and you are able to some texts
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_adddate, container, false);
 
@@ -55,10 +58,6 @@ public class AddDateFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText information = view.findViewById(R.id.edit_information);
-                final EditText meeting = view.findViewById(R.id.edit_meeting);
-                final EditText address = view.findViewById(R.id.edit_address);
-
                 changeFragment();
             }
         });
@@ -95,13 +94,15 @@ public class AddDateFragment extends Fragment {
             }
         });
 
-        dateWeekday = view.findViewById(R.id.date_weekday);
+        /*dateWeekday = view.findViewById(R.id.date_weekday_spinner);
         dateWeekday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.weekday_array, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dateWeekday.setAdapter(adapter);
             }
-        });
+        });*/
 
         /*TextView training = view.findViewById(R.id.name_training);
         training.setPaintFlags(training.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);*/
@@ -189,16 +190,12 @@ public class AddDateFragment extends Fragment {
     }
 
     /**
-     * Show popup window with Monday to Sunday radiobuttons
+     * Show popup window with Monday to Sunday radiobuttons (not implemented)
      */
     public void dateWeekDay() {
+        //set spinner adapter
 
-    }
 
-    private void setRecyclerViewData() {
-
-        itemList = new ArrayList<ListItem>();
-        itemList.add(new DateCardView("Mo", "29.07.","Training", "20:00", "21:45"));
     }
 }
 

@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toolbar;
 
+import com.example.myt.BottomNavigationFragment.DateFragment;
+import com.example.myt.BottomNavigationFragment.HomeFragment;
+import com.example.myt.BottomNavigationFragment.OrganizationFragment;
 import com.example.myt.DateFragment_Tabs.ArchiveFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * Uses the layout activity_main.
+ * The MainActivity is responsible for switching between the different bottom navigation items.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,29 +30,12 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new HomeFragment());
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bottom_navigation, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }
-*/
-        /*return super.onOptionsItemSelected(item);
-
-    }*/
-
+    /**
+     * Loads the chosen fragment, when you switch between the different bottom navigation items.
+     *
+     * @param fragment loads the chosen fragment
+     * @return
+     */
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
 
@@ -61,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * It is the bottom navigation bar
+     * Switches between the chosen fragments and loads the chosen fragment.
+     * {@link #loadFragment(Fragment)}
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -76,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_organization:
                             selectedFragment = new OrganizationFragment();
                             break;
+                        // chose ArchiveFragment for the two last fragments because the fragments
+                        // are empty and not intended to be implemented for the exam
                         case R.id.nav_chat:
                             selectedFragment = new ArchiveFragment();
                             break;
@@ -86,7 +80,5 @@ public class MainActivity extends AppCompatActivity {
                     return loadFragment(selectedFragment);
                 }
             };
-
-
 }
 
