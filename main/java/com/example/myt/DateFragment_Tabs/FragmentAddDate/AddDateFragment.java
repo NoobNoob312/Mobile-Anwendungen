@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -94,15 +95,11 @@ public class AddDateFragment extends Fragment {
             }
         });
 
-        /*dateWeekday = view.findViewById(R.id.date_weekday_spinner);
-        dateWeekday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.weekday_array, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                dateWeekday.setAdapter(adapter);
-            }
-        });*/
+        dateWeekday = view.findViewById(R.id.date_weekday_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.weekday_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dateWeekday.setAdapter(adapter);
+
 
         /*TextView training = view.findViewById(R.id.name_training);
         training.setPaintFlags(training.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);*/
